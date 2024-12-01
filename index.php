@@ -22,3 +22,33 @@ $blogPosts = [
 ];
 
 
+// Function to display blog post titles
+function displayBlogTitles($posts)
+{
+    foreach ($posts as $id => $post) {
+        echo "<li class='list-group-item'><a href='detail.php?post_id=$id'>{$post['title']}</a></li>";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Index</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Welcome to the Blog</h1>
+        <ul class="list-group">
+            <?php displayBlogTitles($blogPosts); ?>
+        </ul>
+    </div>
+</body>
+
+</html>
