@@ -1,21 +1,24 @@
 <?php
-// Include the blog posts array from the index page
 include 'index.php';
 
-// Function to display the details of a blog post
+// Function to display blog details
 function displayBlogPost($posts, $id) {
     if (isset($posts[$id])) {
         $post = $posts[$id];
-        echo "<h1 class='mb-3'>{$post['title']}</h1>";
-        echo "<p><strong>Author:</strong> {$post['author']}</p>";
-        echo "<p><strong>Date:</strong> {$post['date']}</p>";
-        echo "<div class='mt-4'>{$post['content']}</div>";
+        echo "
+        <div class='card shadow-lg'>
+            <div class='card-body'>
+                <h1 class='text-info'>{$post['title']}</h1>
+                <p class='text-light'>By {$post['author']} on {$post['date']}</p>
+                <p class='mt-4'>{$post['content']}</p>
+            </div>
+        </div>
+        ";
     } else {
         echo "<p class='text-danger'>Post not found. Please go back and select a valid post.</p>";
     }
 }
 
-// Get the post ID from the URL
 $postId = isset($_GET['post_id']) ? (int)$_GET['post_id'] : null;
 ?>
 
@@ -27,6 +30,22 @@ $postId = isset($_GET['post_id']) ? (int)$_GET['post_id'] : null;
     <title>Blog Post</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
+        }
+        .card {
+            background-color: #1f2833;
+            border: none;
+        }
+        .text-info {
+            color: #45a29e !important;
+        }
+        .text-light {
+            color: #c5c6c7 !important;
+        }
+    </style>
 </head>
 <body>
     <div class="container my-5">
@@ -34,10 +53,10 @@ $postId = isset($_GET['post_id']) ? (int)$_GET['post_id'] : null;
         if ($postId !== null) {
             displayBlogPost($blogPosts, $postId);
         } else {
-            echo "<p class='text-danger'>No post selected. Please go back to the blog index.</p>";
+            echo "<p class='text-danger'>No post selected. Please go back and select a valid post.</p>";
         }
         ?>
-        <a href="index.php" class="btn btn-primary mt-3">Back to Blog</a>
+        <a href="index.php" class="btn btn-outline-light mt-3">Back to Blog</a>
     </div>
 </body>
 </html>
